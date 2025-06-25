@@ -1,0 +1,190 @@
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", sans-serif;
+  color: #333;
+}
+
+h2{
+  font-size : 35px;
+}
+
+p{
+  font-size: 18px;
+}
+
+h3{
+  font-size : 25px;
+}
+
+.Whole-background {
+  width: 100vw;   /* 뷰포트 가로 전체 */
+  height: 100vh;  /* 뷰포트 세로 전체 */
+  background-color: #F3FBFD;  /* 바깥 배경색 */
+  display: flex;              /* 컨테이너를 중앙에 놓으려면 flex 사용 */
+  justify-content: center;
+  align-items: flex-start;    /* 위쪽 정렬 */
+  padding: 24px;              /* 바깥 여백 */
+  box-sizing: border-box;
+  align-items: flex-start;
+}
+
+
+.container {
+  display: flex;
+  gap: 24px;
+  padding: 30px;
+  background-color: #FDFFFD ;
+  width : 90%;
+  height : 90%;
+  border-radius : 30px;
+  margin-inline: 30px;
+  margin-block: 20px;
+}
+
+.left-area {
+  flex: 1;
+  margin-top: -30px;
+}
+
+.right-area {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 70px;
+}
+
+.top-right {
+  display: flex;
+  gap: 24px;
+}
+
+/* .results 와 .feel-control이 나란히 */
+.results, .feel-control {
+  flex: 1;
+  background-color: #FBFBFB;
+  border-radius: 30px;
+  padding: 14px;
+  padding-left : 30px;
+}
+
+
+
+/* summary 와 추천 박스는 그냥 아래로 쭉 */
+.emotion-summary {
+  background-color: #cbe9f0;
+  border-radius: 30px;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.emotion-summary p{
+  padding-inline: 25px;
+}
+
+.recommand {
+  background-color: #FBFBFB;
+  border-radius: 30px;
+  padding: 16px;
+  
+}
+
+.recommand h3{
+  margin-left: 30px;
+}
+
+/**꾸미기 start **/
+.upload-box {/** end **/
+  background-color: #FBFBFB;
+  border-radius: 30px;
+  padding: 35px;
+  text-align: center;
+  margin-bottom: 20px;
+  height : 60%;
+  
+}
+
+.my-image { /** end **/
+  width: 160px;
+  height: auto; 
+  padding-top : 20%;
+
+}
+
+.upload-btn { /** end **/ 
+  background-color :#EFEFEF;
+  border-radius: 10px;
+  width : 30%;
+  text-align: center;
+}
+
+.analysis-btn {/** end **/
+  width: 100%;
+  height :12%;
+  background-color: #cbe9f0;
+  border: none;
+  padding: 12px;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size : 25px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+  color : #FDFFFD;
+}
+
+.feel-control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.feel-buttons{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.express-btn, .calmdown-btn{
+  background-color: #F2F2F2;
+  padding : 20px;
+  font-weight: bold;
+  margin-inline :15px;
+}
+
+
+.items{
+  display: flex;
+  justify-content: center;
+  margin-top : 30px;
+}
+
+.item-card{
+  margin: 40px;
+  font-weight: bold;
+}
+
+.item-card p {
+  margin-bottom: 4px; /* 원하는 만큼 간격 조절 */
+}
+
+.item-card img{
+  margin-bottom: 20px;
+}
+
+
+.info-line {
+  display: flex;
+  justify-content: space-between; /* 좌우 끝으로 분배 */
+  margin: 4px 4px;
+}
+
+.info-line strong {
+  font-weight: bold;
+}
+
+.info-line span {
+  text-align: right;
+  min-width: 80px;     /* 오른쪽 고정폭 공간 */
+  margin-left: 10px;   /* 왼쪽 여백으로 띄우기 */
+}
