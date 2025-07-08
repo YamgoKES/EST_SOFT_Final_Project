@@ -19,7 +19,7 @@ React 기반 프론트엔드와 FastAPI 백엔드를 연동하여 **실시간 �
 
 ---
 ## 🖼️ UI 동작 예시
-
+![UI 동작 예시](./assets/demo2.gif)
 
 ---
 
