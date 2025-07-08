@@ -1,103 +1,109 @@
-//import { useState } from 'react'
+import { useState } from 'react'
+import { useRef } from 'react' // useRef import 추가!
 //import reactLogo from './assets/react.svg'
 //import viteLogo from '/vite.svg'
 import './App.css'
-import React from 'react';
-import myImg from './assets/image_icon.png';
+import axios from 'axios';
+// import myImg from './assets/image_icon.png';
+import UploadBox from './components/UploadBox';
+import ResultBox from './components/ResultBox';
+import FeelControl from './components/FeelControl';
+import EmotionSummary from './components/EmotionSummary';
+import RecommendationList from './components/RecommendationList';
+
+//analyzeCustomers (구현부가 간단하니까 여기에 작성을 할 예정 복잡해질거 같으면 apu.js등으로 빼겠음)
+const analyzeCustomers = async(imageFile, feelMode) => {
+  const formData = new FormData()
+  formData.append('file', imageFile)
+  formData.append('feel_mode', feelMode); //추가... 
+
+  const response = await axios.post('http://localhost:8000/predict' , formData, {
+    headers : {
+      "Content-Type" : "multipart/form-data"
+    },
+  });
+
+  return response.data;
+};
+
 
 
 function App() {
   //const [count, setCount] = useState(0) 
+  const feelRef = useRef(); // ref 생성
+  const [imageFile, setImageFile] = useState(null);
+  const [loading, setLoading] =useState(false);
+  const [result, setResult] = useState(null); //age, gender, emotion 받기
+  const [feelMode, setFeelMode] = useState(null);
+  const [promptText, setPromptText] = useState('');
+  const [recommendationItems, setRecommendItems] = useState([]);
+  const [previewUrl, setPreviewUrl] = useState(null);
+  const [uploadedFileName, setUploadedFileName] = useState('');
+
+const handleAnalyze = async () => {
+  if (!imageFile) return;
+
+  if (!feelMode) {
+    // UX: 흔들리기 + 로딩 잠깐 보여주기
+    setLoading(true);
+    feelRef.current.classList.add('shake');
+    setTimeout(() => {
+      feelRef.current.classList.remove('shake');
+      setLoading(false);
+    }, 600);
+    return;
+  }
+
+  setLoading(true);
+  try {
+    const res = await analyzeCustomers(imageFile, feelMode);
+    setResult(res);
+  } catch (e) {
+    alert('분석 실패! 다시 시도해주세요.');
+    console.error(e);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
   <>
   <div className="Whole-background">
-  <div className="container">
+    <div className="container">
     
-    <div className="left-area">
-      <h2>Emotion Analysis</h2>
-
-      <div className="upload-box">
-        <img src={myImg} alt="설명 텍스트" className="my-image" />
-        <p>Drag & drop an image here, or click to upload</p>
-        <button className="upload-btn">Upload</button>
+      <div className="left-area">
+        <h2>Emotion Analysis</h2>
+        <UploadBox 
+          setImageFile={setImageFile}
+          previewUrl={previewUrl}
+          uploadedFileName={uploadedFileName}
+          setUploadedFileName={setUploadedFileName}
+          setPreviewUrl={setPreviewUrl}
+        />
+        <button className="analysis-btn" onClick = {handleAnalyze} disabled={loading}>{loading ? '분석 중...' : 'Analysis'}</button>
       </div>
 
-      <button className="analysis-btn">Analysis</button>
-    </div>
-
-    <div className="right-area">
-      <div className="top-right">
-        <div className="results">
-          <h3>Results</h3>
-          <p className="info-line">
-            <strong>Age :</strong>
-            <span>20대</span>
-          </p>
-          <p className="info-line">
-            <strong>Gender :</strong>
-            <span>Female</span>
-          </p>
-          <p className="info-line">
-            <strong>Emotion :</strong>
-            <span>Sadness</span>
-          </p>
+      <div className="right-area">
+        <div className="top-right">
+          <ResultBox result={result}/>
+          <FeelControl
+            setFeelMode={setFeelMode}
+            feelRef={feelRef}
+            currentFeelMode={feelMode}
+          />
         </div>
-
-        <div className="feel-control">
-          <h3>How do you want to feel?</h3>
-          <div className="feel-buttons">
-            <button className="express-btn">Express</button>
-            <button className="calmdown-btn">Calm down</button>
-          </div>
-        </div>
-      </div>
-
-      <div className="emotion-summary">
-        <p>오늘은 기분이 좀 우울해 보이네요,</p>
-        <p>20대 여성인 당신에게 위로가 될 수 있는 아이템들을 추천해드릴게요</p>
-      </div>
-
-      <div className="recommand">
-        <h3>You might like</h3>
-
-        <div className="items">
-          <div className="item-card">
-            <img src="이미지경로" alt="non-image" />
-            <p>상품명</p>
-            <span>shop now</span>
-          </div>
-
-          <div className="item-card">
-            <img src="이미지경로" alt="non-image" />
-            <p>상품명</p>
-            <span>shop now</span>
-          </div>
-
-          <div className="item-card">
-            <img src="이미지경로" alt="non-image" />
-            <p>상품명</p>
-            <span>shop now</span>
-          </div>
-          
-          <div className="item-card">
-            <img src="이미지경로" alt="non-image" />
-            <p>상품명</p>
-            <span>shop now</span>
-          </div>
-          
-          <div className="item-card">
-            <img src="이미지경로" alt="non-image" />
-            <p>상품명</p>
-            <span>shop now</span>
-          </div>
         
-        </div>
+      
+        <EmotionSummary 
+          promptText={feelMode ? result?.recommendationtext : "추천을 보려면 느낌 상태를 선택해주세요."} 
+        />
+        <RecommendationList 
+          items={feelMode ? (result?.recommendationItems || []) : []} 
+        />
+     
       </div>
     </div>
-    
   </div>
-</div>
 
 
   </>
@@ -105,4 +111,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
