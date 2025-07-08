@@ -1,5 +1,13 @@
 # 얼굴 기반 감정・성별・나이 분석 및 감정 완화 추천 시스템
 
+
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Build](https://img.shields.io/badge/build-passing-brightgreen)
+![FastAPI](https://img.shields.io/badge/FastAPI-v0.70-orange)
+![React](https://img.shields.io/badge/React-v18-blue)
+
+
 ---
 
 ## 📌 프로젝트 개요
