@@ -60,6 +60,8 @@ React 기반 프론트엔드와 FastAPI 백엔드를 연동하여 **실시간 �
 - **나이/성별 예측**  
   - VGGFace2 기반 ResNet50 사전학습 모델 사용  
   - GitHub 경로: [VGGFace2 ResNet50](https://github.com/cydonia999/VGGFace2-pytorch)
+  - agegnedernet에 쓰인 afad dataset
+  - dataset 경로:  [afad](https://www.kaggle.com/datasets/lyk1652/afad-full)
 
 ---
 
