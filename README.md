@@ -122,11 +122,11 @@ uvicorn main:app --readload
 성능 지표    : 정확도 86%
 
 예측 항목    : 나이 예측
-모델 구성    : ResNet50 + VGGFace2
+모델 구성    : ResNet50 + EstSoft data
 성능 지표    : MAE 약 5
 
 예측 항목    : 성별 예측
-모델 구성    : ResNet50 + VGGFace2
+모델 구성    : ResNet50 + EstSoft data
 성능 지표    : 정확도 94%
 
 
