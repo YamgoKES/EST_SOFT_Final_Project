@@ -1,4 +1,4 @@
-# 얼굴 기반 감정・성별・나이 분석 및 감정 완화 추천 시스템
+# 감정분석기반 쇼핑추천 서비스
 
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
